@@ -1,6 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Zap, Waves, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const Animation = motion.div;
 
 const treatments = [
   {
@@ -25,7 +28,7 @@ const treatments = [
       "Förbättrad sömn",
       "Stärkt immunförsvar"
     ],
-    link: "/frekvensterapi"
+    link: "/frekvens"
   },
   {
     icon: Sparkles,
@@ -46,16 +49,35 @@ const TreatmentShowcase = () => {
     <section className="py-20 bg-gradient-to-b from-purple-50 to-sage-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+          <Animation
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4"
+          >
             Våra Behandlingar
-          </span>
-          <h2 className="text-4xl font-serif text-purple-900 mb-6 text-center">
-            Populära Behandlingar
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          </Animation>
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-medium text-purple-900 mb-6 text-center">
+              Populära Behandlingar
+            </h2>
+          </Animation>
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-lg text-gray-600 max-w-3xl mx-auto"
+          >
             Upptäck våra specialiserade behandlingar som kombinerar modern teknologi 
             med naturlig läkning för optimala resultat.
-          </p>
+          </Animation>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

@@ -115,7 +115,7 @@ const About = () => {
               className="max-w-3xl mx-auto text-center mb-20 bg-gradient-to-b from-purple-50 via-white to-white backdrop-blur-sm rounded-2xl p-8 shadow-lg hover:shadow-2xl border border-purple-200/30 transition-all duration-300"
             >
               <OptimizedImage 
-                src="/assets/branding/logos/BetterFeel_Stamp.png"
+                src="/assets/branding/logos/BetterFeel_Stamp_optimized.webp"
                 alt="BetterFeel Stamp"
                 className="w-12 h-12 mx-auto mb-6"
                 objectFit="contain"

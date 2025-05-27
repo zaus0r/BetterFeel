@@ -1,14 +1,24 @@
 import React from 'react';
 import { Sparkles, Brain, Zap, Activity } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+const Animation = motion.div;
 
 const InfoSection = () => {
   return (
     <section id="info" className="py-24 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
-            Upptäck Kraften i Frekvens & Biofeedback
-          </h2>
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">
+              Upptäck Kraften i Frekvens & Biofeedback
+            </h2>
+          </Animation>
           <div className="w-24 h-1 bg-gradient-to-r from-[#0047AB] to-[#50C878] mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Vår avancerade teknologi kombinerar traditionell visdom med modern vetenskap

@@ -208,14 +208,14 @@ export const hifuData: TreatmentData = {
     ]
   },
   technical: {
-    equipment: "Vår HIFU-utrustning använder den senaste teknologin för precis och kontrollerad ultraljudsbehandling. Systemet har flera olika behandlingshuvuden för olika huddjup och områden.",
+    equipment: "Vår HIFU-utrustning, Hifu Plaxus 8D, är en avancerad enhet som använder den senaste MMFU-teknologin (Micro-Macro Focused Ultrasound) för att rikta in sig på specifika fettområden och stimulera kollagen- och elastinproduktionen i hudens djupare lager. Systemet har flera olika behandlingshuvuden för olika huddjup och områden.",
     parameters: [
       {
         title: "Behandlingsspecifikationer",
         details: [
-          "Behandlingsdjup: 1.5mm - 4.5mm",
+          "Behandlingsdjup: 1.5mm - 13mm",
           "Energinivåer: 0.1 - 2.0 J/cm²",
-          "Behandlingstid: 30-90 minuter"
+          "Behandlingstid: 45-90 minuter"
         ]
       },
       {

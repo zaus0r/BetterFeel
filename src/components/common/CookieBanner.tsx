@@ -117,7 +117,7 @@ const CookieBanner = () => {
         ) : (
           <div className="max-w-7xl mx-auto p-4 sm:p-6">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-serif text-gray-900">Cookie-inställningar</h3>
+              <h3 className="text-xl font-medium text-gray-900">Cookie-inställningar</h3>
               <button
                 onClick={() => setShowPreferences(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"

@@ -31,7 +31,10 @@ const SEO = ({
     "telephone": "+46737140860",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Kungstensgatan 59",
       "addressLocality": "Stockholm",
+      "postalCode": "113 29",
+      "addressRegion": "Stockholm",
       "addressCountry": "SE"
     },
     "openingHoursSpecification": {
@@ -61,6 +64,7 @@ const SEO = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
+      <meta property="facebook-domain-verification" content="1443088312955104" />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />

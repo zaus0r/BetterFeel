@@ -140,7 +140,7 @@ const TreatmentSection: React.FC<TreatmentSectionProps> = ({ data, searchQuery }
             onClick={() => toggleSection('overview')}
             className="w-full flex justify-between items-center bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl border border-purple-200/30 transition-all duration-300"
           >
-            <h2 className="text-2xl font-serif text-purple-900">Översikt</h2>
+            <h2 className="text-2xl font-medium text-purple-900">Översikt</h2>
             {isExpanded('overview') ? (
               <ChevronUp className="w-6 h-6 text-purple-600" />
             ) : (
@@ -260,7 +260,7 @@ const TreatmentSection: React.FC<TreatmentSectionProps> = ({ data, searchQuery }
             onClick={() => toggleSection('technical')}
             className="w-full flex justify-between items-center bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl border border-purple-200/30 transition-all duration-300"
           >
-            <h2 className="text-2xl font-serif text-purple-900">Tekniska Specifikationer</h2>
+            <h2 className="text-2xl font-medium text-purple-900">Tekniska Specifikationer</h2>
             {isExpanded('technical') ? (
               <ChevronUp className="w-6 h-6 text-purple-600" />
             ) : (
@@ -392,7 +392,7 @@ const TreatmentSection: React.FC<TreatmentSectionProps> = ({ data, searchQuery }
             onClick={() => toggleSection('faqs')}
             className="w-full flex justify-between items-center bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-2xl border border-purple-200/30 transition-all duration-300"
           >
-            <h2 className="text-2xl font-serif text-purple-900">Vanliga Frågor</h2>
+            <h2 className="text-2xl font-medium text-purple-900">Vanliga Frågor</h2>
             {isExpanded('faqs') ? (
               <ChevronUp className="w-6 h-6 text-purple-600" />
             ) : (

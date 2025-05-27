@@ -8,7 +8,10 @@ const routes = [
   '/behandlingar',
   '/hifu',
   '/plaxpot',
+  '/frekvens',
   '/frekvensterapi',
+  '/microneedling',
+  '/hudvard',
   '/coaching',
   '/kunskapsbank',
   '/about',
@@ -30,23 +33,27 @@ export default defineConfig({
     }),
     ViteImageOptimizer({
       test: /\.(jpe?g|png|gif|svg)$/i,
-      exclude: [
-        '**/branding/logos/BetterFeel_Navbar_Logo.png',
-        '**/branding/logos/BetterFeel_Navbar_Logo.webp'
-      ],
+      exclude: [],
       includePublic: true,
       png: {
-        quality: 100,
-        compressionLevel: 0,
+        quality: 80,
+        compressionLevel: 9,
+        palette: true,
+        dither: 1.0,
       },
       webp: {
-        lossless: true,
-        quality: 100,
-        alphaQuality: 100,
+        lossless: false,
+        quality: 80,
+        alphaQuality: 80,
+        effort: 6,
       },
       jpeg: {
-        quality: 75,
+        quality: 80,
         progressive: true,
+        mozjpeg: true,
+        trellisQuantisation: true,
+        overshootDeringing: true,
+        optimizeScans: true,
       },
       svg: {
         multipass: true,
@@ -70,9 +77,14 @@ export default defineConfig({
     force: true
   },
   server: {
-    host: true, // Listen on all addresses
+    host: 'localhost',
     port: 5173,
-    strictPort: true, // Fail if port is already in use
+    strictPort: true,
+    open: true
+  },
+  preview: {
+    port: 5173,
+    strictPort: true
   },
   base: '/',
   build: {

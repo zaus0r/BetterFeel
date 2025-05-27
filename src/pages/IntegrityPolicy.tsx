@@ -28,7 +28,7 @@ const IntegrityPolicy = () => {
 
             <div className="space-y-12">
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-6">Personuppgiftsansvarig</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-6">Personuppgiftsansvarig</h2>
                 <p className="text-gray-700 mb-4">
                   BetterFeel Sverige AB är personuppgiftsansvarig för behandlingen av dina personuppgifter på denna webbplats.
                 </p>
@@ -48,7 +48,7 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Vilka uppgifter samlar vi in?</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Vilka uppgifter samlar vi in?</h2>
                 <p className="text-gray-700 mb-3">Vi samlar in och behandlar följande typer av information:</p>
                 <ul className="list-disc pl-6 text-gray-700 space-y-2">
                   <li>Kontaktinformation: Namn, e-postadress, telefonnummer</li>
@@ -59,7 +59,7 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Hur använder vi dina personuppgifter?</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Hur använder vi dina personuppgifter?</h2>
                 <p className="text-gray-700 mb-3">Vi använder dina personuppgifter för att:</p>
                 <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
                   <li>Tillhandahålla och förbättra våra tjänster</li>
@@ -73,17 +73,17 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Cookies och spårning</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Cookies och spårning</h2>
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-xl font-serif text-purple-900 mb-2">Vad är cookies?</h3>
+                    <h3 className="text-xl font-medium text-purple-900 mb-2">Vad är cookies?</h3>
                     <p className="text-gray-700">
                       Cookies är små textfiler som lagras på din enhet när du besöker vår webbplats. De används för att förbättra din upplevelse och hjälpa oss att analysera och optimera webbplatsens funktionalitet.
                     </p>
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-serif text-purple-900 mb-2">Hur vi använder cookies</h3>
+                    <h3 className="text-xl font-medium text-purple-900 mb-2">Hur vi använder cookies</h3>
                     <p className="text-gray-700 mb-2">Vi använder cookies för att:</p>
                     <ul className="list-disc pl-6 text-gray-700 space-y-2">
                       <li>Komma ihåg dina inställningar och preferenser</li>
@@ -93,7 +93,7 @@ const IntegrityPolicy = () => {
                   </div>
 
                   <div>
-                    <h3 className="text-xl font-serif text-purple-900 mb-2">Dina val gällande cookies</h3>
+                    <h3 className="text-xl font-medium text-purple-900 mb-2">Dina val gällande cookies</h3>
                     <p className="text-gray-700">
                       När du besöker vår webbplats första gången visas en cookie-banner som ber dig att acceptera eller hantera dina cookie-inställningar. Du kan när som helst ändra eller återkalla ditt samtycke via inställningarna i din webbläsare. Observera att vissa funktioner på webbplatsen kan påverkas om du väljer att avaktivera cookies.
                     </p>
@@ -102,14 +102,14 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Lagring av dina uppgifter</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Lagring av dina uppgifter</h2>
                 <p className="text-gray-700">
                   Vi lagrar dina personuppgifter så länge det är nödvändigt för att uppfylla de ändamål för vilka uppgifterna samlades in eller för att följa lagstadgade krav. När uppgifterna inte längre behövs raderar vi dem på ett säkert sätt.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Delning av personuppgifter</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Delning av personuppgifter</h2>
                 <p className="text-gray-700 mb-3">Vi delar inte dina personuppgifter med tredje part utan ditt samtycke, förutom när det krävs för att:</p>
                 <ul className="list-disc pl-6 text-gray-700 space-y-2">
                   <li>Leverera våra tjänster (till exempel via bokningssystem eller analyspartners som Google och HubSpot)</li>
@@ -118,7 +118,7 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Dina rättigheter</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Dina rättigheter</h2>
                 <p className="text-gray-700 mb-3">Du har flera rättigheter enligt GDPR:</p>
                 <ul className="list-disc pl-6 text-gray-700 space-y-2 mb-6">
                   <li>Rätt till insyn: Få tillgång till information om vilka personuppgifter vi har om dig</li>
@@ -134,21 +134,21 @@ const IntegrityPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Säkerhet för dina personuppgifter</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Säkerhet för dina personuppgifter</h2>
                 <p className="text-gray-700">
                   Vi vidtar lämpliga tekniska och organisatoriska åtgärder för att skydda dina personuppgifter från obehörig åtkomst, förlust eller missbruk.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Ändringar i integritetspolicyn</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Ändringar i integritetspolicyn</h2>
                 <p className="text-gray-700">
                   Vi kan uppdatera denna policy vid behov för att återspegla förändringar i våra tjänster eller gällande lagstiftning. Den senaste versionen finns alltid tillgänglig på vår webbplats.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-2xl font-serif text-purple-900 mb-4">Kontakta oss</h2>
+                <h2 className="text-2xl font-medium text-purple-900 mb-4">Kontakta oss</h2>
                 <p className="text-gray-700">
                   Vid frågor om denna integritetspolicy eller hur vi behandlar dina personuppgifter, vänligen kontakta oss via uppgifterna ovan.
                 </p>

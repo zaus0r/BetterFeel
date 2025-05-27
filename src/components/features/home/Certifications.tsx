@@ -28,7 +28,7 @@ const Certifications = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-rose-100 text-rose-600 text-sm font-medium mb-4">
             Kvalitet & Säkerhet
           </span>
-          <h2 className="text-4xl font-serif text-purple-900 mb-6 relative">
+          <h2 className="text-4xl font-medium text-purple-900 mb-6 relative">
             Certifieringar & Kvalitetsgarantier
             <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-purple-400 to-sage-400"></div>
           </h2>
@@ -54,7 +54,7 @@ const Certifications = () => {
             >
               <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-purple-50 to-transparent opacity-50 rounded-bl-full"></div>
               <cert.icon className="w-12 h-12 text-purple-600 mx-auto mb-6 relative z-10" />
-              <h3 className="text-2xl font-serif text-purple-900 mb-4">
+              <h3 className="text-2xl font-medium text-purple-900 mb-4">
                 {cert.title}
               </h3>
               <p className="text-gray-600">

@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star, Quote, ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star, Quote, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
 import ReviewSchema from '../../common/ReviewSchema';
+import Animation from '../../common/Animation';
 
 const formatDate = (dateString: string) => {
   const reviewDate = new Date(dateString);
@@ -31,7 +32,85 @@ const formatDate = (dateString: string) => {
   }
 };
 
+// Add CSS for hiding scrollbar and marquee animation
+const customStyles = `
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .marquee-container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+  }
+  
+  .marquee-content {
+    display: flex;
+    animation: marquee 90s linear infinite;
+    width: max-content;
+  }
+  
+  .marquee-content:hover {
+    animation-play-state: paused;
+  }
+`;
+
 const testimonials = [
+  {
+    name: "Carina O.",
+    date: "2024-12-23", // "för 3 dagar sedan"
+    text: "Mycket proffsigt & lyxiga behandlingar av Irené som direkt ger synliga resultat - fantastiskt!!",
+    rating: 5
+  },
+  {
+    name: "Alexandra K.",
+    date: "2024-12-09", // "för 17 dagar sedan"
+    text: "Irene erbjuder en fantastisk ansiktsbehandling som verkligen gör underverk för huden. Hennes 1000 % engagemang och passion för sitt hantverk lyser igenom i varje detalj. Med en varm och personlig atmosfär gör hon varje besök till en verklig upplevelse. Rekommenderas varmt!",
+    rating: 5
+  },
+  {
+    name: "Elisabeth E.",
+    date: "2024-12-08", // "för 18 dagar sedan"
+    text: "Irene var oerhört kunnig, kändes väldigt trygg och mycket trevlig. Rekommenderar henne varmt",
+    rating: 5
+  },
+  {
+    name: "Camilla H.",
+    date: "2024-11-29", // "för 27 dagar sedan"
+    text: "Så härligt att bli ompysslad och tillsnyggad av skickliga Irene. Så härlig miljö. Älskar att få komma dit och komma ut med fint resultat💖",
+    rating: 5
+  },
+  {
+    name: "Jennica J.",
+    date: "2024-11-26", // "för ungefär en månad sedan"
+    text: "Otroligt varmt person som gjorde underverk för min hud",
+    rating: 5
+  },
+  {
+    name: "Annelie L.",
+    date: "2024-10-26", // "för 2 månader sedan"
+    text: "Irene är så proffsig och supertrevlig, så nöjd med resultatet. Annelie",
+    rating: 5
+  },
+  {
+    name: "Anneli H.",
+    date: "2024-10-26", // "för 2 månader sedan"
+    text: "Irene är som alltid proffsig och engagerad. Denna fuktstimulerande ansiktsbehandling gav bra resultat",
+    rating: 5
+  },
   {
     name: "Ulrika I.",
     date: "2024-12-20", // "för en dag sedan"
@@ -125,7 +204,7 @@ const testimonials = [
   {
     name: "marlene r.",
     date: "2024-03-28", // "för 9 månader sedan"
-    text: "Har ME/CFS och fibromyalgi. Levt med kroppslig smärta sen 2010. Den kom och gick och förflyttades runt om olika delar i kroppen. Från 2015, blev det en ihållande smärta. Under behandlingen, var det en stund av ingen smärta, kände mig så \"lätt\" och fri. Var m��nga år sen sist. Smärtan kom dock tillbaka men ej lika grov som innan. (Skriver ca 5h efter behandlingen)T om min syn blev bättre, har läsglasögon efter optikerbesök men ME/CFS påverkar synen ytterligare. Den blir grumlig när kroppen/hjärnan upplever stress. Eftersom det är inte ett \"synfel\" hjälper inte glasögon. Summakardemumma - när jag kom till Irene, kunde jag knappt stå på benen, när jag lämnade var jag starkare. (Orkade t om gå en sväng i en butik) Kan ännu inte svara hur detta håller i längden och hur det kommer påverka mina sjukdomar men en väldigt imponerad start. Ger mig hopp i en annars som det känns hopplöst situation med mina diagnoser. Och behandlaren Irene är fantastisk. Kände mig trygg i att hon vill mitt bästa.",
+    text: "Har ME/CFS och fibromyalgi. Levt med kroppslig smärta sen 2010. Den kom och gick och förflyttades runt om olika delar i kroppen. Från 2015, blev det en ihållande smärta. Under behandlingen, var det en stund av ingen smärta, kände mig så \"lätt\" och fri. Var många år sen sist. Smärtan kom dock tillbaka men ej lika grov som innan. (Skriver ca 5h efter behandlingen)T om min syn blev bättre, har läsglasögon efter optikerbesök men ME/CFS påverkar synen ytterligare. Den blir grumlig när kroppen/hjärnan upplever stress. Eftersom det är inte ett \"synfel\" hjälper inte glasögon. Summakardemumma - när jag kom till Irene, kunde jag knappt stå på benen, när jag lämnade var jag starkare. (Orkade t om gå en sväng i en butik) Kan ännu inte svara hur detta håller i längden och hur det kommer påverka mina sjukdomar men en väldigt imponerad start. Ger mig hopp i en annars som det känns hopplöst situation med mina diagnoser. Och behandlaren Irene är fantastisk. Kände mig trygg i att hon vill mitt bästa.",
     rating: 5
   },
   {
@@ -150,32 +229,17 @@ const testimonials = [
 
 // Add this interface for expanded state tracking
 interface ExpandedState {
-  [key: number]: boolean;
+  [key: number | string]: boolean;
 }
 
 const Testimonials = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [expandedCards, setExpandedCards] = useState<ExpandedState>({});
 
-  const toggleExpand = (index: number) => {
+  const toggleExpand = (index: number | string) => {
     setExpandedCards(prev => ({
       ...prev,
       [index]: !prev[index]
     }));
-  };
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const cardWidth = 350;
-      const gap = 24;
-      const scrollAmount = cardWidth + gap;
-      const container = scrollContainerRef.current;
-      
-      container.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
   };
 
   const truncateText = (text: string, maxLength: number = 120) => {
@@ -183,8 +247,12 @@ const Testimonials = () => {
     return text.slice(0, maxLength).trim() + '...';
   };
 
+  // Create a duplicate array of testimonials for the infinite scroll effect
+  const allTestimonials = [...testimonials, ...testimonials];
+
   return (
     <section className="py-20 bg-gradient-to-b from-purple-100 to-white">
+      <style dangerouslySetInnerHTML={{ __html: customStyles }} />
       <ReviewSchema 
         reviews={testimonials}
         itemReviewed={{
@@ -194,50 +262,72 @@ const Testimonials = () => {
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
-            Recensioner
-          </span>
-          <h2 className="text-4xl font-serif text-purple-900 mb-6">
-            Vad Våra Kunder Säger
-          </h2>
+          <Animation
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4"
+          >
+            Kundupplevelser
+          </Animation>
+
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl font-medium text-purple-900 mb-6">
+              Vad Våra Kunder Säger
+            </h2>
+          </Animation>
+
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-lg text-gray-600 max-w-2xl mx-auto"
+          >
+            Upptäck hur våra behandlingar har hjälpt hundratals kunder att uppnå sina mål för hälsa och välbefinnande.
+          </Animation>
+
+          {/* Overall Rating Display */}
+          <div className="flex items-center justify-center mt-8 mb-12">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-purple-200/30">
+              <div className="flex items-center gap-4">
+                <div className="text-4xl font-serif text-purple-900">5.0</div>
+                <div className="flex flex-col items-start">
+                  <div className="flex">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star key={star} className="w-6 h-6 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600">Baserat på över 100 recensioner</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative group">
-          {/* Navigation Buttons */}
-          <button
-            onClick={() => scroll('left')}
-            className="absolute -left-4 md:left-2 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-purple-50 p-3 rounded-full shadow-lg transition-all duration-200 opacity-90 hover:opacity-100"
-            aria-label="Scroll left"
-          >
-            <ChevronLeft className="w-6 h-6 text-purple-600" />
-          </button>
-          <button
-            onClick={() => scroll('right')}
-            className="absolute -right-4 md:right-2 top-1/2 -translate-y-1/2 z-10 bg-white hover:bg-purple-50 p-3 rounded-full shadow-lg transition-all duration-200 opacity-90 hover:opacity-100"
-            aria-label="Scroll right"
-          >
-            <ChevronRight className="w-6 h-6 text-purple-600" />
-          </button>
-
-          {/* Testimonials Container */}
-          <div 
-            ref={scrollContainerRef}
-            className="flex overflow-x-auto gap-6 pb-8 px-4 snap-x snap-mandatory scrollbar-hide"
-          >
-            {testimonials.map((testimonial, index) => (
+        {/* Marquee Testimonials Container */}
+        <div className="marquee-container mb-12">
+          <div className="marquee-content">
+            {allTestimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
-                className={`flex-none w-[350px] bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 snap-start ${
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut", delay: index * 0.05 }}
+                className={`flex-none w-[350px] mx-3 bg-white/95 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-purple-200/30 ${
                   !expandedCards[index] && 'h-[320px]'
                 }`}
               >
                 <div className="flex flex-col h-full">
                   {/* Top Section */}
                   <div className="flex-shrink-0">
-                    <Quote className="w-8 h-8 text-purple-200 mb-2" />
+                    <Quote className="w-8 h-8 text-[#064e3b] mb-2" />
                     <div className="flex mb-3">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -266,7 +356,7 @@ const Testimonials = () => {
                     {testimonial.text.length > 120 && (
                       <button
                         onClick={() => toggleExpand(index)}
-                        className="text-purple-600 hover:text-purple-700 flex items-center text-sm font-medium mb-4"
+                        className="text-[#064e3b] hover:text-[#043927] flex items-center text-sm font-medium mb-4"
                       >
                         {expandedCards[index] ? (
                           <>
@@ -282,20 +372,31 @@ const Testimonials = () => {
                     
                     <div className="pt-4 border-t border-purple-100">
                       <p className="font-medium text-purple-900">{testimonial.name}</p>
-                      <p className="text-sm text-gray-500">{formatDate(testimonial.date)}</p>
                     </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+        </div>
 
-          {/* Scroll Indicator */}
-          <div className="mt-6 flex justify-center gap-2">
-            <div className="w-8 h-1 bg-purple-200 rounded-full"></div>
-            <div className="w-8 h-1 bg-purple-400 rounded-full"></div>
-            <div className="w-8 h-1 bg-purple-200 rounded-full"></div>
-          </div>
+        {/* Call to Action */}
+        <div className="mt-16 text-center">
+          <Animation
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <a
+              href="https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/konsultation-telefon-3124094"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center px-8 py-4 bg-[#064e3b] text-white rounded-lg hover:bg-[#043927] shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+            >
+              Boka Din Kostnadsfria Konsultation
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </a>
+          </Animation>
         </div>
       </div>
     </section>

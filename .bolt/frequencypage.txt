@@ -1,0 +1,1378 @@
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Clock, ArrowRight, Shield, Brain, Activity, Zap, Sparkles, ChevronDown, CheckCircle2, Phone, Star, Quote, Heart, Check, Timer, Repeat, CalendarDays, MapPin, Globe, Info } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import ServiceSEO from '../components/common/ServiceSEO';
+import FAQSchema from '../components/common/FAQSchema';
+import BreadcrumbSchema from '../components/common/BreadcrumbSchema';
+import ServiceSchema from '../components/common/ServiceSchema';
+import OptimizedImage from '../components/common/OptimizedImage';
+import Animation from '../components/common/Animation';
+
+const FrequencyTherapy: React.FC = () => {
+  const mainContentRef = useRef<HTMLDivElement>(null);
+  const sensoCardRef = useRef<HTMLDivElement>(null);
+  // Add new state for mobile tabs
+  const [openTabs, setOpenTabs] = useState<number[]>([0]);
+  const [selectedTreatment, setSelectedTreatment] = useState<number | null>(0);
+
+  const toggleTab = (index: number) => {
+    if (window.innerWidth < 768) {
+      // Mobile behavior: toggle tab in openTabs array
+      setOpenTabs(prev => 
+        prev.includes(index) 
+          ? prev.filter(i => i !== index)
+          : [...prev, index]
+      );
+    } else {
+      // Desktop behavior: single tab selection
+      setSelectedTreatment(selectedTreatment === index ? null : index);
+    }
+  };
+
+  const scrollToContent = () => {
+    if (mainContentRef.current) {
+      mainContentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToSenso = () => {
+    if (sensoCardRef.current) {
+      const headerOffset = 80;
+      const elementPosition = sensoCardRef.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  const treatmentOptions = [
+    {
+      id: "senso",
+      title: "SENSO",
+      price: "749 kr",
+      duration: "60 minuter",
+      location: "På kliniken",
+      description: "En populär, lugn och avkopplande behandling som ger din kropp möjlighet att återställa balans och energi på djupet. Perfekt för dig som söker djup avslappning och förnyad energi.",
+      features: [
+        "Djup avslappning genom subtila vibrationer", 
+        "Balansering av kroppens energifält",
+        "Stressreducering och energiökning",
+        "Personlig vägledning under behandlingen"
+      ],
+      benefits: [
+        "Minskad stress och ångest",
+        "Förbättrad sömnkvalitet",
+        "Ökad energi och vitalitet",
+        "Stärkt immunförsvar"
+      ],
+      details: {
+        preparation: "Kom i bekväma kläder. Undvik alkohol och koffein några timmar före behandlingen.",
+        process: "Under behandlingen ligger du bekvämt medan utrustningen sänder subtila frekvenser till kroppen. De flesta upplever en djup avslappning, ibland med lätta stickningar eller värmekänsla.",
+        aftercare: "Drick mycket vatten efter behandlingen. Vila om du känner behov av det. Full effekt kan upplevas 1-3 dagar efter behandlingen."
+      },
+      bookingUrl: "https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/frekvens-senso-2-3189643",
+      type: "inperson",
+      sessions: "Rekommendation: 3-5 sessioner för optimalt resultat"
+    },
+    {
+      id: "harmoniq",
+      title: "HarmoniQ",
+      price: "995 kr",
+      duration: "90 minuter",
+      location: "På distans eller kliniken",
+      description: "En skräddarsydd behandling som ger din kropp exakt det den behöver för att återfå balans och styrka. Perfekt för dig som vill ha en djupgående behandling i hemmets bekvämlighet eller på kliniken.",
+      features: [
+        "Personlig frekvensanalys", 
+        "Skräddarsydd behandling (distans eller på plats)",
+        "Djupgående energibalansering",
+        "Vägledning för optimal effekt"
+      ],
+      benefits: [
+        "Ökad mental klarhet",
+        "Djupare balansering av energisystem",
+        "Förbättrad kroppslig funktion",
+        "Personligt anpassad behandling"
+      ],
+      details: {
+        preparation: "För distansbehandling: Säkerställ att du har en lugn plats där du kan vara ostörd i 90 minuter. För klinikbesök: Följ samma rekommendationer som för SENSO.",
+        process: "Vi börjar med en djupgående analys av ditt energitillstånd. Baserat på detta skapas en personlig frekvensbehandling. Under behandlingen kan du ligga ner och slappna av, oavsett om det sker på distans eller på plats.",
+        aftercare: "Du får personliga rekommendationer efter sessionen. Många upplever en djupare och mer långvarig effekt jämfört med standardbehandlingen."
+      },
+      bookingUrl: "https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/frekvens-harmoniq-distans-3189647",
+      type: "both",
+      sessions: "Rekommendation: 3-4 sessioner med 2-4 veckors mellanrum"
+    },
+    {
+      id: "balance-mastery",
+      title: "Balance Mastery",
+      price: "1995 kr",
+      duration: "120 minuter + uppföljning",
+      location: "På distans eller kliniken",
+      description: "En exklusiv premiumbehandling med djupgående analys, personlig rapport och uppföljning. Perfekt för dig som vill ha det allra bästa för din hälsa och välbefinnande.",
+      features: [
+        "Omfattande hälsoanalys", 
+        "Personlig behandlingsrapport",
+        "Premium behandling (distans eller på plats)",
+        "Uppföljningssamtal"
+      ],
+      benefits: [
+        "Fullständig systemöversikt",
+        "Långsiktig hälsoförbättring",
+        "Personligt anpassad vårdplan",
+        "Djupgående problemlösning"
+      ],
+      details: {
+        preparation: "Du får specifika instruktioner baserade på din hälsoprofilering innan behandlingen. För bästa resultat, följ dessa rekommendationer noga.",
+        process: "Behandlingen börjar med en djupgående hälsokartläggning. Därefter skapas en skräddarsydd premiumbehandling som adresserar dina specifika behov. Efter sessionen får du en detaljerad rapport med analys och rekommendationer.",
+        aftercare: "En vecka efter behandlingen har vi ett uppföljningssamtal för att diskutera resultaten och eventuella justeringar. Du får även långsiktiga rekommendationer för att bibehålla och förbättra dina resultat."
+      },
+      bookingUrl: "https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/frekvens-balance-mastery-premium-paket-distans-3189646",
+      type: "both",
+      sessions: "Rekommendation: 1-3 sessioner med personligt anpassad frekvens"
+    }
+  ];
+
+  const faqs = [
+    {
+      question: "Vad är frekvensterapi?",
+      answer: "Frekvensterapi är en holistisk behandlingsmetod som använder specifika frekvenser för att balansera kroppens energifält och stödja naturlig läkning."
+    },
+    {
+      question: "Hur lång tid tar en behandling?",
+      answer: "En standardbehandling tar 60 minuter, medan mer omfattande sessioner kan vara upp till 90-120 minuter."
+    },
+    {
+      question: "Är behandlingen säker?",
+      answer: "Ja, frekvensterapi är en helt säker och icke-invasiv behandlingsmetod som är CE-certifierad och följer alla säkerhetsstandarder."
+    },
+    {
+      question: "Hur många behandlingar behövs?",
+      answer: "Antalet behandlingar varierar beroende på individuella behov. Vissa upplever förbättring efter en session, medan andra kan behöva flera behandlingar."
+    }
+  ];
+
+  return (
+    <>
+      <ServiceSchema
+        name="Frekvensbehandling"
+        description="Holistisk frekvensbehandling för balans och välbefinnande. En modern behandlingsmetod som använder bioresonans för att stödja kroppens naturliga läkningsprocesser."
+        url="https://betterfeel.se/frekvensterapi"
+        image="/assets/images/treatments/frequency/hero.jpg"
+        provider="BetterFeel"
+        areaServed="Stockholm"
+        price="1495"
+        priceCurrency="SEK"
+      />
+      <ServiceSEO 
+        title="Frekvensterapi | BetterFeel"
+        description="Upptäck kraften i frekvensterapi hos BetterFeel. Vi erbjuder SENSO-behandlingar och distansbehandlingar för optimal hälsa och välbefinnande."
+        keywords="frekvensterapi, SENSO-behandling, distansbehandling, biofeedback, Stockholm"
+        url="https://betterfeel.se/frekvensterapi"
+        serviceName="Frekvensterapi"
+        preloadImages={['/assets/images/treatments/frequency/frequency_hero.webp']}
+        treatments={[
+          {
+            name: "SENSO Frekvensterapi",
+            description: "En 60-minuters behandling som främjar djup avslappning genom subtila vibrationer och balansering.",
+            duration: "PT60M",
+            price: "749",
+            url: "https://betterfeel.se/frekvensterapi#senso"
+          },
+          {
+            name: "HarmoniQ Distansbehandling",
+            description: "En 90-minuters distansbehandling som ger exakt det din kropp behöver för att återfå balans och styrka.",
+            duration: "PT90M",
+            price: "995",
+            url: "https://betterfeel.se/frekvensterapi#harmoniq"
+          },
+          {
+            name: "Balance Mastery Premium",
+            description: "En omfattande 120-minuters premiumbehandling med personlig analys, rapport och uppföljning.",
+            duration: "PT120M",
+            price: "1995",
+            url: "https://betterfeel.se/frekvensterapi#balance-mastery"
+          }
+        ]}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Hem", item: "/" },
+          { name: "Behandlingar", item: "/behandlingar" },
+          { name: "Frekvensterapi", item: "/frekvensterapi" }
+        ]}
+      />
+      <FAQSchema questions={faqs} />
+      <main className="min-h-screen">
+        {/* Hero Section - Enhanced for Conversion */}
+        <section className="relative flex items-center h-screen">
+          <div className="absolute inset-0 z-0">
+            <picture>
+              <source
+                srcSet="/assets/images/treatments/frequency/frequency_hero.webp"
+                type="image/webp"
+              />
+              <OptimizedImage
+                src="/assets/images/treatments/frequency/frequency_hero.jpg"
+                alt="Frekvensterapi - Naturlig balans och läkning"
+                isBackground
+                priority
+                className="absolute inset-0"
+                objectFit="cover"
+                objectPosition="center"
+                quality={85}
+                width={1920}
+                height={1080}
+              />
+            </picture>
+            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
+          </div>
+
+          <div className="relative z-10 w-full">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="inline-flex items-center mb-6"
+              >
+                <span className="text-[#10b981] uppercase tracking-wider text-base sm:text-lg font-medium">
+                  CE-CERTIFIERAD TEKNOLOGI
+                </span>
+              </motion.div>
+              
+              <motion.h1
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className="text-4xl sm:text-5xl lg:text-6xl font-serif text-white mb-6"
+              >
+                Återställ Din Naturliga<br />
+                <span className="text-[#10b981]">Balans & Energi</span>
+              </motion.h1>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl"
+              >
+                Upplev kraften i modern frekvensterapi. Holistiskt beprövad metod 
+                för att återställa balans och välbefinnande.
+              </motion.p>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <a
+                  href="https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/konsultation-telefon-3124094"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 bg-[#064e3b] text-white rounded-lg hover:bg-[#043927] transition-all duration-300 text-base font-medium shadow-lg hover:shadow-xl"
+                >
+                  Boka Gratis Konsultation <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+                <a
+                  href="tel:+46737140860"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-white/30 text-white rounded-lg hover:bg-white/10 transition-all duration-300 text-base font-medium backdrop-blur-sm"
+                >
+                  <Phone className="mr-2 h-4 w-4" />
+                  Ring Oss
+                </a>
+              </motion.div>
+
+              {/* Trust Indicators */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.1 }}
+                className="mt-8 pt-6 border-t border-white/10"
+              >
+                <div className="flex items-center gap-6">
+                  <div className="flex -space-x-2">
+                    {[1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className="w-10 h-10 rounded-full border-2 border-white bg-purple-200 flex items-center justify-center overflow-hidden"
+                      >
+                        <picture>
+                          <source srcSet={`/assets/images/avatars/avatar-${i}.webp`} type="image/webp" />
+                          <img
+                            src={`/assets/images/avatars/avatar-${i}.jpg`}
+                            alt={`Nöjd Frekvensterapi Kund ${i}`}
+                            className="w-full h-full object-cover"
+                            width={40}
+                            height={40}
+                          />
+                        </picture>
+                  </div>
+                    ))}
+                </div>
+                  <div className="text-white">
+                    <div className="flex items-center">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star
+                          key={star}
+                          className="w-5 h-5 text-yellow-400 fill-current"
+                        />
+                      ))}
+                    </div>
+                    <p className="text-sm text-white/90">
+                      Över 100+ nöjda kunder senaste året
+                  </p>
+                </div>
+              </div>
+              </motion.div>
+
+              {/* Feature Pills */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 1.2 }}
+                className="mt-8 flex flex-wrap gap-3"
+              >
+                {[
+                  "Frekvensterapi",
+                  "Energibalansering",
+                  "Holistisk Behandling",
+                  "Naturlig Läkning",
+                  "Stressreducering"
+                ].map((feature, index) => (
+                  <span 
+                    key={index} 
+                    className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white/90 text-sm border border-white/20"
+                  >
+                    {feature}
+                  </span>
+                ))}
+              </motion.div>
+            </div>
+          </div>
+
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
+            onClick={scrollToContent}
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white hover:text-white/80 transition-colors duration-300"
+            aria-label="Scroll to content"
+          >
+            <ChevronDown className="h-8 w-8 animate-bounce" />
+          </motion.button>
+        </section>
+
+        {/* Quick Benefits Section */}
+        <section id="intro" ref={mainContentRef} className="py-20 bg-gradient-to-b from-white to-purple-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-4 gap-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <Shield className="w-8 h-8 text-[#064e3b] mx-auto mb-3" />
+                  <h3 className="text-lg font-medium text-purple-900">CE-Certifierad</h3>
+                  <p className="text-gray-600">Säker teknologi</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 }}
+                className="text-center"
+              >
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <Activity className="w-8 h-8 text-[#064e3b] mx-auto mb-3" />
+                  <h3 className="text-lg font-medium text-purple-900">Beprövad Metod</h3>
+                  <p className="text-gray-600">10+ års erfarenhet</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                className="text-center"
+              >
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <Star className="w-8 h-8 text-[#064e3b] mx-auto mb-3" />
+                  <h3 className="text-lg font-medium text-purple-900">5.0 Betyg</h3>
+                  <p className="text-gray-600">Över 100+ kunder</p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                className="text-center"
+              >
+                <div className="bg-white rounded-xl p-6 shadow-sm">
+                  <Heart className="w-8 h-8 text-[#064e3b] mx-auto mb-3" />
+                  <h3 className="text-lg font-medium text-purple-900">100% Nöjd</h3>
+                  <p className="text-gray-600">Kundgaranti</p>
+                    </div>
+                  </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* What is Frequency Therapy Section */}
+        <section className="py-20 bg-gradient-to-b from-purple-100 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-[1.5fr,1fr] gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+                className="bg-white rounded-2xl p-8 md:p-12 shadow-xl"
+              >
+                <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">Vad är Frekvensterapi?</h2>
+                <div className="prose prose-lg prose-purple">
+                  <p className="text-gray-700 mb-6">
+                    Frekvensterapi (eller Bioresonans) är en kraftfull, naturlig behandling som hjälper din kropp att återfå balans genom att använda specifika frekvenser. Det här är en metod som arbetar med kroppens energifält för att återställa harmoni och stödja självläkning—utan att du behöver vara fysiskt närvarande.
+                  </p>
+              </div>
+
+                <h3 className="text-xl font-medium text-purple-900 mt-8 mb-4">Så fungerar det</h3>
+                <p className="text-gray-700 mb-6">
+                  Frekvensterapi skickar specifika frekvenser till din kropp, som hjälper till att identifiera och åtgärda obalanser. Genom avancerad teknologi kan vi analysera din kropp och hjälpa den att återhålla sig, stärka immunförsvaret och lindra stress. Behandlingen är enkel, effektiv och kan göras på distans—från var du än är.
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-6 mt-8">
+                  <div className="bg-purple-50/50 rounded-xl p-6">
+                    <Brain className="w-8 h-8 text-[#064e3b] mb-4" />
+                    <h3 className="text-xl font-medium text-purple-900 mb-2">Holistisk Metod</h3>
+                    <p className="text-gray-600">Behandlar hela kroppen på energinivå</p>
+                </div>
+                  <div className="bg-purple-50/50 rounded-xl p-6">
+                    <Activity className="w-8 h-8 text-[#064e3b] mb-4" />
+                    <h3 className="text-xl font-medium text-purple-900 mb-2">Effektiv Balansering</h3>
+                    <p className="text-gray-600">Återställer kroppens naturliga frekvenser</p>
+              </div>
+            </div>
+
+                {/* Featured Quote */}
+                <div className="mt-8 bg-purple-50/50 rounded-xl p-6">
+                  <Quote className="w-8 h-8 text-[#064e3b] mb-4" />
+                  <blockquote className="text-lg text-gray-700 italic">
+                    "Frekvensterapi är en av de mest effektiva metoderna för att återställa kroppens naturliga balans och energi."
+                  </blockquote>
+                  <p className="mt-4 text-sm text-gray-600">- Dr. Maria Andersson, Holistisk Hälsoexpert</p>
+          </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="flex flex-col gap-6"
+            >
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl self-start">
+                  <div className="relative aspect-square w-full">
+                <OptimizedImage 
+                      src="/assets/images/location/clinic-odenplan-exterior_optimized.png"
+                      alt="BetterFeel klinik vid Odenplan - Frekvensterapi behandling"
+                      className="w-full h-full"
+                      objectFit="cover"
+                      objectPosition="center"
+                      quality={85}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-transparent"></div>
+                    <div className="absolute bottom-8 left-8 right-8 text-white">
+                      <h3 className="text-2xl font-medium mb-2">Välkommen till vår klinik</h3>
+                      <p className="text-lg opacity-90">En oas av lugn och harmoni</p>
+                    </div>
+                    </div>
+                    </div>
+
+                <div className="bg-white rounded-2xl p-8 shadow-xl">
+                  <h3 className="text-2xl font-medium text-purple-900 mb-4">Fördelar med Frekvensterapi</h3>
+                  <ul className="space-y-6">
+                    <li className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                          <Zap className="w-5 h-5 text-[#064e3b]" />
+                    </div>
+                          </div>
+                          <div>
+                        <h4 className="font-medium text-purple-900">Ökad energi</h4>
+                        <p className="text-gray-600 text-sm">Återställ kroppens naturliga flöde och känn dig mer vital</p>
+                          </div>
+                        </li>
+                    <li className="flex items-start gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                          <Activity className="w-5 h-5 text-[#064e3b]" />
+                        </div>
+                      </div>
+                          <div>
+                        <h4 className="font-medium text-purple-900">Stressreducering</h4>
+                        <p className="text-gray-600 text-sm">Upplev djup avslappning och inre balans</p>
+                          </div>
+                        </li>
+                      </ul>
+                </div>
+              </motion.div>
+                    </div>
+
+            {/* Additional Benefits and Distance Treatment Section */}
+            <div className="mt-12 grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="bg-white rounded-2xl p-8 shadow-xl"
+              >
+                <h3 className="text-2xl font-medium text-purple-900 mb-6">Fler fördelar med Frekvensterapi</h3>
+                <ul className="space-y-6">
+                  <li className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                        <Timer className="w-5 h-5 text-[#064e3b]" />
+                        </div>
+                      </div>
+                    <div>
+                      <h4 className="font-medium text-purple-900">Bättre sömn</h4>
+                      <p className="text-gray-600">Förbättra din sömnkvalitet och vakna upp utvilad</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-[#064e3b]" />
+                  </div>
+                </div>
+                    <div>
+                      <h4 className="font-medium text-purple-900">Stärkt immunförsvar</h4>
+                      <p className="text-gray-600">Hjälp kroppen att motverka infektioner och hålla sig frisk</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-4">
+                    <div className="flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
+                        <CheckCircle2 className="w-5 h-5 text-[#064e3b]" />
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-purple-900">Friskvårdsberättigad</h4>
+                      <p className="text-gray-600">Utnyttja ditt friskvårdsbidrag för frekvensbehandlingar hos oss</p>
+                    </div>
+                  </li>
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white rounded-2xl p-8 shadow-xl"
+              >
+                <h3 className="text-2xl font-medium text-purple-900 mb-4">Distansbehandling – Enkelt och Bekvämt</h3>
+                <p className="text-gray-700 mb-6">
+                  Du kan ta emot behandlingen var du än befinner dig. Oavsett om du är hemma eller på resande fot, skickas frekvenserna till din kropp via energifältet. Du behöver bara slappna av och ta emot vi gör resten.
+                </p>
+                
+                <div className="mt-6">
+                  <a 
+                    href="/kunskapsbank" 
+                    className="inline-flex items-center text-[#064e3b] font-medium hover:underline"
+                  >
+                    Läs mer i kunskapsbanken <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                    </div>
+            </motion.div>
+                    </div>
+          </div>
+        </section>
+
+        {/* Treatment Cards Section */}
+        <section id="treatments" className="py-20 bg-gradient-to-b from-white to-purple-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+                Våra Behandlingar
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">
+                Skräddarsydda Frekvensbehandlingar
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Välj den behandling som passar dina behov bäst. Alla behandlingar inkluderar kostnadsfri konsultation.
+              </p>
+            </div>
+
+            {/* Treatment Tabs for Improved Layout */}
+            <div className="mb-12">
+              {/* Desktop layout - tabs at top, content below */}
+              <div className="hidden md:grid md:grid-cols-3 gap-4">
+                {treatmentOptions.map((treatment, index) => (
+                  <motion.button
+                    key={`tab-desktop-${index}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    onClick={() => toggleTab(index)}
+                    className={`px-6 py-4 rounded-xl text-left transition-all duration-300 ${
+                      selectedTreatment === index
+                        ? 'bg-[#064e3b] text-white shadow-xl'
+                        : 'bg-white text-purple-900 shadow-lg hover:shadow-xl'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                          <div>
+                        <h3 className="text-xl font-medium">{treatment.title}</h3>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className={selectedTreatment === index ? 'text-white/80' : 'text-gray-600'}>
+                            {treatment.price}
+                          </p>
+                          <div className="flex flex-wrap gap-1 mt-1">
+                            {treatment.type === "inperson" && (
+                              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                selectedTreatment === index ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-600'
+                              }`}>
+                                På kliniken
+                              </span>
+                            )}
+                            {treatment.type === "both" && (
+                              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                selectedTreatment === index ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-600'
+                              }`}>
+                                Distans/Kliniken
+                              </span>
+                            )}
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${
+                              selectedTreatment === index ? 'bg-white/20 text-white' : 'bg-green-100 text-green-700'
+                            }`}>
+                              Friskvårdsberättigad
+                            </span>
+                          </div>
+                          </div>
+                          </div>
+                      <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                        selectedTreatment === index ? 'bg-white/20' : 'bg-purple-50'
+                      }`}>
+                        <ChevronDown 
+                          className={`w-5 h-5 ${
+                            selectedTreatment === index ? 'text-white transform rotate-180' : 'text-[#064e3b]'
+                          } transition-transform duration-300`} 
+                        />
+                          </div>
+                    </div>
+                  </motion.button>
+                ))}
+                    </div>
+
+              {/* Mobile layout - accordion style with content after each tab */}
+              <div className="grid grid-cols-1 gap-4 md:hidden">
+                {treatmentOptions.map((treatment, index) => (
+                  <div key={`accordion-item-${index}`}>
+                    <motion.button
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      onClick={() => toggleTab(index)}
+                      id={`tab-mobile-${index}`}
+                      className={`w-full px-6 py-4 rounded-xl text-left transition-all duration-300 ${
+                        openTabs.includes(index)
+                          ? 'bg-[#064e3b] text-white shadow-xl'
+                          : 'bg-white text-purple-900 shadow-lg hover:shadow-xl'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="text-xl font-medium">{treatment.title}</h3>
+                          <div className="flex items-center gap-2 mt-1">
+                            <p className={openTabs.includes(index) ? 'text-white/80' : 'text-gray-600'}>
+                              {treatment.price}
+                            </p>
+                            <div className="flex flex-wrap gap-1 mt-1">
+                              {treatment.type === "inperson" && (
+                                <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                  openTabs.includes(index) ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-600'
+                                }`}>
+                                  På kliniken
+                                </span>
+                              )}
+                              {treatment.type === "both" && (
+                                <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                  openTabs.includes(index) ? 'bg-white/20 text-white' : 'bg-purple-100 text-purple-600'
+                                }`}>
+                                  Distans/Kliniken
+                                </span>
+                              )}
+                              <span className={`text-xs px-2 py-0.5 rounded-full ${
+                                openTabs.includes(index) ? 'bg-white/20 text-white' : 'bg-green-100 text-green-700'
+                              }`}>
+                                Friskvårdsberättigad
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                          openTabs.includes(index) ? 'bg-white/20' : 'bg-purple-50'
+                        }`}>
+                          <ChevronDown 
+                            className={`w-5 h-5 ${
+                              openTabs.includes(index) ? 'text-white transform rotate-180' : 'text-[#064e3b]'
+                            } transition-transform duration-300`} 
+                          />
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    {/* Content displayed immediately after its tab on mobile */}
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ 
+                        opacity: openTabs.includes(index) ? 1 : 0,
+                        height: openTabs.includes(index) ? 'auto' : 0
+                      }}
+                      transition={{ 
+                        duration: 0.4,
+                        ease: "easeInOut"
+                      }}
+                      className="overflow-hidden mt-4"
+                    >
+                      {openTabs.includes(index) && (
+                        <div className="bg-white rounded-2xl overflow-hidden shadow-2xl p-8">
+                          <div className="grid md:grid-cols-[1fr,2fr] gap-8">
+                            {/* Treatment content (same as original) */}
+                            {/* Left Column - Visual Information */}
+                            <div className="space-y-6">
+                              {/* Treatment Tag and Duration */}
+                              <div className="flex flex-col space-y-4">
+                                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#064e3b]/10 text-[#064e3b] text-sm font-medium self-start">
+                                  Frekvensbehandling
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  <Clock className="w-5 h-5 text-[#064e3b]" />
+                                  <span className="text-gray-700">{treatment.duration}</span>
+                                </div>
+                                <div className="flex items-center space-x-2">
+                                  {treatment.type === "inperson" ? (
+                                    <>
+                                      <MapPin className="w-5 h-5 text-[#064e3b]" />
+                                      <span className="text-gray-700">Endast på kliniken</span>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <Globe className="w-5 h-5 text-[#064e3b]" />
+                                      <span className="text-gray-700">På kliniken eller distans</span>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                              
+                              {/* Treatment Visualization */}
+                              <div className="bg-purple-50/50 p-6 rounded-xl">
+                                <p className="font-medium text-purple-900 mb-4">Huvudfördelar</p>
+                                <ul className="space-y-3">
+                                  {treatment.benefits.map((benefit, i) => (
+                                    <li key={i} className="flex items-start gap-2 text-gray-600">
+                                      <CheckCircle2 className="w-5 h-5 text-[#064e3b] mt-0.5 flex-shrink-0" />
+                                      <span>{benefit}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                        </div>
+                              
+                              {/* Sessions Info */}
+                              <div className="space-y-4">
+                                <div className="bg-purple-50/50 rounded-xl p-4">
+                                  <p className="font-medium text-purple-900 mb-2">Information:</p>
+                                  <div className="space-y-2 text-sm text-gray-600">
+                                    <div className="flex items-start gap-2">
+                                      <Info className="w-4 h-4 text-[#064e3b] mt-0.5" />
+                                      <p>{treatment.sessions}</p>
+                      </div>
+                                  </div>
+                                </div>
+                                
+                                <motion.a
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  href={treatment.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#064e3b] text-white rounded-lg hover:bg-[#043927] shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+                      >
+                                  Boka {treatment.title}
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                                </motion.a>
+                    </div>
+                  </div>
+                            
+                            {/* Right Column - Treatment Details */}
+                            <div className="space-y-8">
+                              <div>
+                                <h3 className="text-2xl font-medium text-purple-900 mb-4">{treatment.title}</h3>
+                                <div className="flex items-center gap-3 mb-6">
+                                  <div className="text-xl font-bold text-[#064e3b]">{treatment.price}</div>
+                                  <div className="text-sm text-gray-500 px-3 py-1 bg-purple-50 rounded-full">
+                                    {treatment.duration}
+                </div>
+                                </div>
+                                <p className="text-gray-700 mb-6">
+                                  {treatment.description}
+                                </p>
+                              </div>
+                              
+                              <div className="grid md:grid-cols-1 gap-6">
+                                {/* Treatment Details */}
+                                <div>
+                                  <p className="font-medium text-purple-900 mb-3">Detta ingår:</p>
+                                  <ul className="space-y-2">
+                                    {treatment.features.map((feature, i) => (
+                                      <li key={i} className="flex items-start gap-2 text-gray-600">
+                                        <Check className="w-4 h-4 text-[#064e3b] mt-1 flex-shrink-0" />
+                                        <span>{feature}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              </div>
+
+                              {/* Treatment Process */}
+                              <div className="space-y-4">
+                                <h4 className="text-xl font-medium text-purple-900">Behandlingsprocess</h4>
+                                
+                                <div className="space-y-4">
+                                  <div className="bg-purple-50/50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 mb-2">
+                                      <Shield className="w-5 h-5 text-[#064e3b]" />
+                                      <p className="font-medium text-purple-900">Förberedelse</p>
+                                    </div>
+                                    <p className="text-gray-700 text-sm">{treatment.details.preparation}</p>
+                                  </div>
+                                  
+                                  <div className="bg-purple-50/50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 mb-2">
+                                      <Activity className="w-5 h-5 text-[#064e3b]" />
+                                      <p className="font-medium text-purple-900">Under behandlingen</p>
+                                    </div>
+                                    <p className="text-gray-700 text-sm">{treatment.details.process}</p>
+                                  </div>
+                                  
+                                  <div className="bg-purple-50/50 p-4 rounded-xl">
+                                    <div className="flex items-center gap-2 mb-2">
+                                      <Heart className="w-5 h-5 text-[#064e3b]" />
+                                      <p className="font-medium text-purple-900">Efter behandlingen</p>
+                                    </div>
+                                    <p className="text-gray-700 text-sm">{treatment.details.aftercare}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+              </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Expanded Treatment Details for Desktop */}
+            <div className="hidden md:block relative min-h-[800px]">
+              <div className="absolute inset-0">
+                {treatmentOptions.map((treatment, index) => (
+              <motion.div
+                    key={`content-desktop-${index}`}
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: selectedTreatment === index ? 1 : 0,
+                    }}
+                transition={{ duration: 0.4 }}
+                    className={`absolute inset-0 ${selectedTreatment === index ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                  >
+                    {selectedTreatment === index && (
+                      <div className="bg-white rounded-2xl overflow-hidden shadow-2xl p-8">
+                        <div className="grid md:grid-cols-[1fr,2fr] gap-8">
+                          {/* Treatment content remains unchanged */}
+                          {/* Left Column - Visual Information */}
+                          <div className="space-y-6">
+                            {/* Treatment Tag and Duration */}
+                            <div className="flex flex-col space-y-4">
+                              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#064e3b]/10 text-[#064e3b] text-sm font-medium self-start">
+                                Frekvensbehandling
+                    </div>
+                              <div className="flex items-center space-x-2">
+                                <Clock className="w-5 h-5 text-[#064e3b]" />
+                                <span className="text-gray-700">{treatment.duration}</span>
+                              </div>
+                              <div className="flex items-center space-x-2">
+                                {treatment.type === "inperson" ? (
+                                  <>
+                                    <MapPin className="w-5 h-5 text-[#064e3b]" />
+                                    <span className="text-gray-700">Endast på kliniken</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <Globe className="w-5 h-5 text-[#064e3b]" />
+                                    <span className="text-gray-700">På kliniken eller distans</span>
+                                  </>
+                                )}
+                              </div>
+                    </div>
+
+                            {/* Treatment Visualization */}
+                            <div className="bg-purple-50/50 p-6 rounded-xl">
+                              <p className="font-medium text-purple-900 mb-4">Huvudfördelar</p>
+                              <ul className="space-y-3">
+                                {treatment.benefits.map((benefit, i) => (
+                                  <li key={i} className="flex items-start gap-2 text-gray-600">
+                                    <CheckCircle2 className="w-5 h-5 text-[#064e3b] mt-0.5 flex-shrink-0" />
+                                    <span>{benefit}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                    </div>
+
+                            {/* Sessions Info */}
+                            <div className="space-y-4">
+                              <div className="bg-purple-50/50 rounded-xl p-4">
+                                <p className="font-medium text-purple-900 mb-2">Information:</p>
+                                <div className="space-y-2 text-sm text-gray-600">
+                                  <div className="flex items-start gap-2">
+                                    <Info className="w-4 h-4 text-[#064e3b] mt-0.5" />
+                                    <p>{treatment.sessions}</p>
+                      </div>
+                                  </div>
+                                </div>
+                                
+                                <motion.a
+                                  whileHover={{ scale: 1.02 }}
+                                  whileTap={{ scale: 0.98 }}
+                                  href={treatment.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center w-full px-6 py-3 bg-[#064e3b] text-white rounded-lg hover:bg-[#043927] shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+                      >
+                                  Boka {treatment.title}
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                                </motion.a>
+                    </div>
+                  </div>
+                          
+                          {/* Right Column - Treatment Details */}
+                          <div className="space-y-8">
+                      <div>
+                              <h3 className="text-2xl font-medium text-purple-900 mb-4">{treatment.title}</h3>
+                              <div className="flex items-center gap-3 mb-6">
+                                <div className="text-xl font-bold text-[#064e3b]">{treatment.price}</div>
+                                <div className="text-sm text-gray-500 px-3 py-1 bg-purple-50 rounded-full">
+                                  {treatment.duration}
+                                </div>
+                              </div>
+                              <p className="text-gray-700 mb-6">
+                                {treatment.description}
+                        </p>
+                      </div>
+
+                            <div className="grid md:grid-cols-1 gap-6">
+                              {/* Treatment Details */}
+                      <div>
+                                <p className="font-medium text-purple-900 mb-3">Detta ingår:</p>
+                                <ul className="space-y-2">
+                                  {treatment.features.map((feature, i) => (
+                                    <li key={i} className="flex items-start gap-2 text-gray-600">
+                                      <Check className="w-4 h-4 text-[#064e3b] mt-1 flex-shrink-0" />
+                                      <span>{feature}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+
+                            {/* Treatment Process */}
+                            <div className="space-y-4">
+                              <h4 className="text-xl font-medium text-purple-900">Behandlingsprocess</h4>
+                              
+                              <div className="space-y-4">
+                                <div className="bg-purple-50/50 p-4 rounded-xl">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <Shield className="w-5 h-5 text-[#064e3b]" />
+                                    <p className="font-medium text-purple-900">Förberedelse</p>
+                                  </div>
+                                  <p className="text-gray-700 text-sm">{treatment.details.preparation}</p>
+                                </div>
+                                
+                                <div className="bg-purple-50/50 p-4 rounded-xl">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <Activity className="w-5 h-5 text-[#064e3b]" />
+                                    <p className="font-medium text-purple-900">Under behandlingen</p>
+                                  </div>
+                                  <p className="text-gray-700 text-sm">{treatment.details.process}</p>
+                                </div>
+                                
+                                <div className="bg-purple-50/50 p-4 rounded-xl">
+                                  <div className="flex items-center gap-2 mb-2">
+                                    <Heart className="w-5 h-5 text-[#064e3b]" />
+                                    <p className="font-medium text-purple-900">Efter behandlingen</p>
+                                  </div>
+                                  <p className="text-gray-700 text-sm">{treatment.details.aftercare}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Treatment Process Section */}
+        <section className="py-20 bg-gradient-to-b from-purple-100 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+                Behandlingsprocess
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">
+                Din Resa till Balans & Välmående
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Vi guidar dig genom hela processen, från konsultation till eftervård, 
+                för att säkerställa bästa möjliga resultat.
+                        </p>
+                      </div>
+
+            <div className="grid md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <h3 className="font-medium text-2xl text-purple-900 mb-6">Förberedelse</h3>
+                <ul className="space-y-4">
+                  {[
+                    "Kostnadsfri konsultation",
+                    "Personlig frekvensanalys",
+                    "Skräddarsydd behandlingsplan"
+                  ].map((step, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#064e3b] text-white flex items-center justify-center text-sm">
+                        {i + 1}
+                    </div>
+                      <span className="text-gray-700">{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <h3 className="font-medium text-2xl text-purple-900 mb-6">Behandling</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Clock className="w-5 h-5 text-[#064e3b] mt-1" />
+                          <div>
+                      <p className="font-medium text-purple-900">Behandlingstid</p>
+                      <p className="text-gray-600">60-120 minuter</p>
+                          </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Activity className="w-5 h-5 text-[#064e3b] mt-1" />
+                          <div>
+                      <p className="font-medium text-purple-900">Komfortnivå</p>
+                      <p className="text-gray-600">Avslappnande och behaglig</p>
+                          </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Shield className="w-5 h-5 text-[#064e3b] mt-1" />
+                          <div>
+                      <p className="font-medium text-purple-900">Säkerhet</p>
+                      <p className="text-gray-600">CE-certifierad teknologi</p>
+                          </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <h3 className="font-medium text-2xl text-purple-900 mb-6">Eftervård</h3>
+                <ul className="space-y-4">
+                  {[
+                    "Personliga rekommendationer",
+                    "Drick mycket vatten",
+                    "Undvik stress 24h",
+                    "Uppföljning vid behov"
+                  ].map((care, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-[#064e3b] mt-1" />
+                      <span className="text-gray-700">{care}</span>
+                        </li>
+                  ))}
+                      </ul>
+              </motion.div>
+                    </div>
+          </div>
+        </section>
+
+        {/* Results Timeline */}
+        <section className="py-20 bg-gradient-to-b from-white to-purple-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+                Resultatutveckling
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">
+                Din Väg till Optimal Balans
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Följ din kropps naturliga läkningsprocess och se hur resultaten utvecklas över tid.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <h3 className="font-medium text-2xl text-purple-900 mb-6">Resultatutveckling</h3>
+                <div className="space-y-6">
+                  {[
+                    { day: "Direkt efter", desc: "Ökad avslappning och energi" },
+                    { day: "Dag 1-3", desc: "Kroppen börjar återbalansera sig" },
+                    { day: "Vecka 1-2", desc: "Märkbar förbättring i välmående" },
+                    { day: "Månad 1", desc: "Djupgående balansering" },
+                    { day: "Månad 2-3", desc: "Optimal balans uppnådd" }
+                  ].map((phase, i) => (
+                    <div key={i} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-24">
+                        <span className="text-sm font-medium text-[#064e3b]">{phase.day}</span>
+                          </div>
+                      <div className="flex-grow">
+                        <p className="text-gray-700">{phase.desc}</p>
+                          </div>
+                        </div>
+                  ))}
+                      </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                className="bg-white rounded-xl p-8 shadow-lg"
+              >
+                <h3 className="font-medium text-2xl text-purple-900 mb-6">Långsiktiga Resultat</h3>
+                <div className="space-y-6">
+                  <div className="flex items-start gap-3">
+                    <Timer className="w-5 h-5 text-[#064e3b] mt-1" />
+                    <div>
+                      <p className="font-medium text-purple-900">Varaktighet</p>
+                      <p className="text-gray-600">Individuellt, beroende på livsstil och behov</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Repeat className="w-5 h-5 text-[#064e3b] mt-1" />
+                    <div>
+                      <p className="font-medium text-purple-900">Underhållsbehandling</p>
+                      <p className="text-gray-600">Rekommenderas 1-2 gånger per månad</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Heart className="w-5 h-5 text-[#064e3b] mt-1" />
+                    <div>
+                      <p className="font-medium text-purple-900">Livsstilspåverkan</p>
+                      <p className="text-gray-600">Hälsosam livsstil förlänger resultatet</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Call to Action */}
+                <div className="mt-8 p-6 bg-purple-50/50 rounded-xl">
+                  <p className="text-purple-900 font-medium mb-4">
+                    Vill du veta mer om hur frekvensterapi kan hjälpa dig?
+                  </p>
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href="https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/konsultation-telefon-3124094"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#064e3b] rounded-lg hover:bg-white/90 shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+                  >
+                    <CalendarDays className="mr-2 h-5 w-5" />
+                    Boka Kostnadsfri Konsultation
+                  </motion.a>
+                </div>
+              </motion.div>
+                  </div>
+                </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-20 bg-gradient-to-b from-purple-100 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
+                Vanliga Frågor
+              </span>
+              <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">
+                Allt Du Behöver Veta
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Här hittar du svar på de vanligaste frågorna om frekvensterapi.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {faqs.map((faq, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="bg-white rounded-xl p-8 shadow-lg"
+                >
+                  <h3 className="text-xl font-medium text-purple-900 mb-4">{faq.question}</h3>
+                  <p className="text-gray-700">{faq.answer}</p>
+              </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Enhanced CTA Section */}
+        <section className="py-20 bg-gradient-to-b from-white to-purple-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-[#064e3b] to-[#043927] rounded-2xl p-12 text-center text-white relative overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              <div className="relative z-10">
+                <span className="inline-block px-4 py-1 rounded-full bg-white/20 text-white text-sm font-medium mb-6">
+                  Begränsat Antal Tider
+                </span>
+                
+                <h2 className="text-3xl md:text-4xl font-medium mb-6">
+                  Börja Din Resa mot Balans & Välmående Idag
+                </h2>
+                
+                <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8">
+                  Ta första steget mot ett mer balanserat liv. 
+                  Boka en kostnadsfri konsultation och få en personlig behandlingsplan.
+                </p>
+
+                {/* Benefits Grid */}
+                <div className="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+                  {[
+                    'Kostnadsfri konsultation',
+                    'Personlig behandlingsplan',
+                    'Flexibla tider',
+                    'Erfaren terapeut',
+                    'Friskvårdsberättigad behandling'
+                  ].map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="flex items-center justify-center sm:justify-start gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2"
+                    >
+                      <CheckCircle2 className="w-5 h-5 text-white/90" />
+                      <span className="text-white/90">{benefit}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Urgency Indicator */}
+                <div className="flex items-center justify-center gap-2 mb-8">
+                  <Clock className="w-5 h-5 text-white/90" />
+                  <span className="text-white/90">Boka din tid idag</span>
+                </div>
+
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href="https://www.bokadirekt.se/boka-tjanst/betterfeel-sverige-ab-56180/konsultation-telefon-3124094"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#064e3b] rounded-lg hover:bg-white/90 shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+                  >
+                    <CalendarDays className="mr-2 h-5 w-5" />
+                    Boka Kostnadsfri Konsultation
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    href="tel:+46737140860"
+                    className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white/10 shadow-lg hover:shadow-xl transition-all duration-300 text-lg font-medium"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    Ring Oss
+                  </motion.a>
+                </div>
+
+                {/* Trust Indicator */}
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <div className="flex items-center justify-center gap-6">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3].map((i) => (
+                        <div
+                          key={i}
+                          className="w-10 h-10 rounded-full border-2 border-white bg-purple-200 flex items-center justify-center overflow-hidden"
+                        >
+                          <picture>
+                            <source srcSet={`/assets/images/avatars/avatar-${i}.webp`} type="image/webp" />
+                            <img
+                              src={`/assets/images/avatars/avatar-${i}.jpg`}
+                              alt={`Nöjd Frekvensterapi Kund ${i}`}
+                              className="w-full h-full object-cover"
+                              width={40}
+                              height={40}
+                            />
+                          </picture>
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-sm text-white/90">
+                      Gå med över 100+ nöjda kunder som redan har börjat sin resa mot bättre balans
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Decorative Elements */}
+              <div className="absolute top-0 left-0 w-full h-full">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-white/10 to-transparent rounded-full transform translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tl from-white/10 to-transparent rounded-full transform -translate-x-1/2 translate-y-1/2"></div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+    </>
+  );
+};
+
+export default FrequencyTherapy;

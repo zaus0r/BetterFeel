@@ -38,7 +38,24 @@ export default {
         sans: ['Inter', 'sans-serif'],
         serif: ['Cormorant Garamond', 'serif'],
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            color: '#1f2937',
+            a: {
+              color: '#9333ea',
+              '&:hover': {
+                color: '#7e22ce',
+              },
+            },
+            'h1, h2, h3, h4': {
+              color: '#1f2937',
+              fontWeight: '700',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

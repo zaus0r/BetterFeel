@@ -13,12 +13,22 @@ const routes = [
     changefreq: 'weekly'
   },
   {
-    path: '/frekvensterapi',
+    path: '/frekvens',
     priority: '0.8',
     changefreq: 'weekly'
   },
   {
     path: '/plaxpot',
+    priority: '0.8',
+    changefreq: 'weekly'
+  },
+  {
+    path: '/microneedling',
+    priority: '0.8',
+    changefreq: 'weekly'
+  },
+  {
+    path: '/hudvard',
     priority: '0.8',
     changefreq: 'weekly'
   },

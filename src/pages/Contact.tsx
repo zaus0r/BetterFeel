@@ -229,7 +229,7 @@ const Contact = () => {
                     <div className="flex items-start">
                       <MapPin className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                       <div>
-                        <h3 className="text-2xl font-serif text-purple-900 mb-2">Adress</h3>
+                        <h3 className="text-2xl font-medium text-purple-900 mb-2">Adress</h3>
                         <p className="text-base text-gray-600 leading-relaxed">Kungstensgatan 59</p>
                         <p className="text-base text-gray-600 leading-relaxed">113 29 Stockholm</p>
                       </div>
@@ -237,21 +237,21 @@ const Contact = () => {
                     <div className="flex items-start">
                       <Phone className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                       <div>
-                        <h3 className="text-2xl font-serif text-purple-900 mb-2">Telefon</h3>
+                        <h3 className="text-2xl font-medium text-purple-900 mb-2">Telefon</h3>
                         <p className="text-base text-gray-600 leading-relaxed">073-714 08 60</p>
                       </div>
                     </div>
                     <div className="flex items-start">
                       <Mail className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                       <div>
-                        <h3 className="text-2xl font-serif text-purple-900 mb-2">E-post</h3>
+                        <h3 className="text-2xl font-medium text-purple-900 mb-2">E-post</h3>
                         <p className="text-base text-gray-600 leading-relaxed">info@betterfeel.se</p>
                       </div>
                     </div>
                     <div className="flex items-start">
                       <Clock className="w-6 h-6 text-purple-400 mr-4 mt-1" />
                       <div>
-                        <h3 className="text-2xl font-serif text-purple-900 mb-2">Öppettider</h3>
+                        <h3 className="text-2xl font-medium text-purple-900 mb-2">Öppettider</h3>
                         <p className="text-base text-gray-600 leading-relaxed">Måndag - Fredag: 09:00 - 19:00</p>
                         <p className="text-base text-gray-600 leading-relaxed">Lördag - Söndag: Stängt</p>
                       </div>
@@ -261,7 +261,7 @@ const Contact = () => {
                         <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
                       </div>
                       <div>
-                        <h3 className="text-2xl font-serif text-purple-900 mb-3">Sociala Medier</h3>
+                        <h3 className="text-2xl font-medium text-purple-900 mb-3">Sociala Medier</h3>
                         <div className="flex space-x-4">
                           <a
                             href="https://www.facebook.com/profile.php?id=61554186415765"
@@ -443,7 +443,7 @@ const Contact = () => {
                 <div className="flex items-start mb-6">
                   <Clock className="w-8 h-8 text-purple-400 mr-4" />
                   <div>
-                    <h3 className="text-2xl font-serif text-purple-900 mb-3">Bokning & Avbokning</h3>
+                    <h3 className="text-2xl font-medium text-purple-900 mb-3">Bokning & Avbokning</h3>
                     <p className="text-base text-gray-600 leading-relaxed mb-4">
                       Du kan enkelt boka tid via vår online-bokning eller genom att ringa oss direkt. 
                       Vi hjälper dig gärna att hitta en tid som passar dig.
@@ -465,7 +465,7 @@ const Contact = () => {
                 <div className="flex items-start mb-6">
                   <MapPin className="w-8 h-8 text-purple-400 mr-4" />
                   <div>
-                    <h3 className="text-2xl font-serif text-purple-900 mb-3">Hitta Hit</h3>
+                    <h3 className="text-2xl font-medium text-purple-900 mb-3">Hitta Hit</h3>
                     <p className="text-base text-gray-600 leading-relaxed mb-4">
                       Vi ligger centralt beläget på Kungstensgatan 59, bara en kort promenad från Odenplans tunnelbana och pendeltågsstation.
                     </p>

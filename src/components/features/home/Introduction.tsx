@@ -9,7 +9,7 @@ const Introduction = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-purple-100 text-purple-600 text-sm font-medium mb-4">
             Vår Filosofi
           </span>
-          <h2 className="text-3xl md:text-4xl font-serif text-purple-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-medium text-purple-900 mb-6">
             En Holistisk Approach till Hälsa
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -23,7 +23,7 @@ const Introduction = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 mb-6">
               <Heart className="h-8 w-8 text-purple-600" />
             </div>
-            <h3 className="text-xl font-serif text-purple-900 mb-4">Helhetssyn</h3>
+            <h3 className="text-xl font-medium text-purple-900 mb-4">Helhetssyn</h3>
             <p className="text-gray-600">
               Vi ser varje person som unik och anpassar behandlingarna efter dina 
               individuella behov och mål.
@@ -34,7 +34,7 @@ const Introduction = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage-100 mb-6">
               <Sparkles className="h-8 w-8 text-sage-600" />
             </div>
-            <h3 className="text-xl font-serif text-purple-900 mb-4">Innovation</h3>
+            <h3 className="text-xl font-medium text-purple-900 mb-4">Innovation</h3>
             <p className="text-gray-600">
               Våra behandlingsmetoder bygger på den senaste teknologin inom 
               frekvensmedicin och biofeedback.
@@ -45,7 +45,7 @@ const Introduction = () => {
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-100 mb-6">
               <Leaf className="h-8 w-8 text-rose-400" />
             </div>
-            <h3 className="text-xl font-serif text-purple-900 mb-4">Naturlig Läkning</h3>
+            <h3 className="text-xl font-medium text-purple-900 mb-4">Naturlig Läkning</h3>
             <p className="text-gray-600">
               Vi stödjer kroppens naturliga läkningsprocesser för hållbara och 
               långsiktiga resultat.

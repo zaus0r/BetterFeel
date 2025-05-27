@@ -6,10 +6,10 @@ import './styles/global.css';
 console.log('Starting application...');
 
 try {
-  ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
+    </React.StrictMode>
   );
 } catch (error) {
   console.error('Error rendering application:', error);

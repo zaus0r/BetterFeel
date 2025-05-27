@@ -55,7 +55,7 @@ const Coaching = () => {
           
         {/* Content Container */}
           <div className="relative z-10 w-full text-center">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-16 md:pt-32 pb-12 sm:pb-20">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-16 md:pt-32 pb-12 sm:pb-20">
               {/* Semi-transparent backdrop for better text readability */}
               <div className="bg-black/50 backdrop-blur-sm rounded-3xl p-6 sm:p-8 md:p-12 max-w-4xl mx-auto mt-[-4rem] sm:mt-0">
                 <motion.div
@@ -187,7 +187,7 @@ const Coaching = () => {
             >
               <motion.div className="max-w-3xl mx-auto text-center">
                 <OptimizedImage 
-                  src="/assets/branding/logos/BetterFeel_Stamp.png"
+                  src="/assets/branding/logos/BetterFeel_Stamp_optimized.png"
                   alt="BetterFeel Stamp"
                   className="w-12 h-12 mx-auto mb-6"
                   objectFit="contain"
@@ -441,7 +441,7 @@ const Coaching = () => {
               className="mb-16 relative h-[300px] md:h-[400px] rounded-3xl overflow-hidden max-w-4xl mx-auto"
             >
               <img
-                src="/assets/images/treatments/coaching-mindset.jpeg"
+                src="/assets/images/treatments/coaching-mindset_optimized.jpg"
                 alt="Coaching Mindset - Personlig utveckling och mental styrka"
                 className="absolute inset-0 w-full h-full object-cover"
               />
@@ -604,14 +604,9 @@ const Coaching = () => {
 
                       {/* Program Details */}
                       <div className="mb-12">
-                        <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
-                          <div>
-                            <h4 className="text-2xl font-serif text-purple-900 mb-2">12-veckors Coachingprogram</h4>
-                            <p className="text-gray-600">Din resa mot personlig utveckling och framgång</p>
-                          </div>
-                          <div className="mt-4 md:mt-0">
-                            <p className="text-2xl font-medium text-[#064e3b]">18 800 kr</p>
-                          </div>
+                        <div className="text-center mb-8">
+                          <h4 className="text-2xl font-serif text-purple-900 mb-2">12-veckors Coachingprogram</h4>
+                          <p className="text-gray-600">Din resa mot personlig utveckling och framgång</p>
                         </div>
 
                         <div className="grid md:grid-cols-2 gap-6 mb-12">

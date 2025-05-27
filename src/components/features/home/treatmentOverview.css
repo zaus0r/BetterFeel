@@ -1,0 +1,93 @@
+/* Custom scrollbar styles */
+.hide-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  display: block !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(209, 213, 219, 0.3);
+  border-radius: 10px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(165, 180, 252, 0.5);
+}
+
+/* For Firefox */
+.hide-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(209, 213, 219, 0.3) transparent;
+}
+
+/* Ensure smooth scrolling */
+.hide-scrollbar {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto !important; /* Ensure vertical scrolling works */
+}
+
+/* Prevent scrollbar from causing layout shifts */
+.hide-scrollbar {
+  scrollbar-gutter: stable;
+}
+
+/* Ensure content is properly padded at the bottom */
+.hide-scrollbar > div:last-child {
+  padding-bottom: 20px;
+}
+
+/* Prevent any other elements from scrolling */
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* Ensure only the designated container scrolls */
+.overflow-y-auto {
+  overflow-y: auto !important;
+}
+
+/* Remove all other scrollbars except for hide-scrollbar */
+*:not(.hide-scrollbar)::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+}
+
+/* Ensure motion divs don't create their own scrollbars */
+.motion-div {
+  overflow: visible !important;
+}
+
+/* Prevent body scrolling when carousel is active */
+.carousel-active {
+  overflow: hidden;
+}
+
+/* Remove any fading effects that could cut through buttons */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none !important;
+}
+
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* Ensure no masking/fading at edges on the container or its children */
+.overflow-x-auto > div {
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+/* Ensure the image container maintains its size */
+.grid.md\:grid-cols-2 > div:first-child {
+  height: 100% !important;
+  flex: 0 0 50%;
+  transition: none !important;
+  transform: none !important;
+} 
